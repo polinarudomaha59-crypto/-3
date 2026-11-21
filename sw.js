@@ -1,6 +1,6 @@
 const VERSION = "v1";
 const SCOPE = self.registration.scope;
-const CACHE_PREFIX = `variant25-web:${SCOPE}:`;
+const CACHE_PREFIX = "variant25-web:" + SCOPE + ":";
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 
 const FILES = [
@@ -16,34 +16,49 @@ const FILES = [
     "./images/item1.png"
 ];
 
-self.addEventListener("install", (event) => {
-    const requests = FILES.map((path) =>
-        new Request(new URL(path, SCOPE), { cache: "reload" })
-    );
+// 1. Установка (сохраняем файлы в кэш)
+self.addEventListener("install", function(event) {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => cache.addAll(requests))
-    );
-});
-
-self.addEventListener("activate", (event) => {
-    event.waitUntil(
-        caches.keys().then((names) => {
-            const oldVersions = names.filter((name) =>
-                name.startsWith(CACHE_PREFIX) && name !== CACHE_NAME
-            );
-            return Promise.all(oldVersions.map((name) => caches.delete(name)));
+        caches.open(CACHE_NAME).then(function(cache) {
+            var requests = [];
+            for (var i = 0; i < FILES.length; i++) {
+                requests.push(new Request(new URL(FILES[i], SCOPE), { cache: "reload" }));
+            }
+            return cache.addAll(requests);
         })
     );
 });
 
-self.addEventListener("fetch", (event) => {
-    const request = event.request;
+// 2. Активация (удаляем старый кэш)
+self.addEventListener("activate", function(event) {
+    event.waitUntil(
+        caches.keys().then(function(names) {
+            var promises = [];
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
+                if (name.indexOf(CACHE_PREFIX) === 0 && name !== CACHE_NAME) {
+                    promises.push(caches.delete(name));
+                }
+            }
+            return Promise.all(promises);
+        })
+    );
+});
+
+// 3. Перехват запросов (отдаем из кэша или из сети)
+self.addEventListener("fetch", function(event) {
+    var request = event.request;
     if (request.method !== "GET" || !request.url.startsWith(SCOPE)) return;
 
     event.respondWith(
-        caches.open(CACHE_NAME).then(async(cache) => {
-            const savedResponse = await cache.match(request);
-            return savedResponse ? ? fetch(request);
+        caches.open(CACHE_NAME).then(function(cache) {
+            return cache.match(request).then(function(savedResponse) {
+                if (savedResponse) {
+                    return savedResponse;
+                } else {
+                    return fetch(request);
+                }
+            });
         })
     );
 });
