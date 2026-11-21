@@ -4,36 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Заказ</title>
+
+    <!-- Подключение PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#b85c24">
 </head>
 
 <body>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js").catch((error) => {
+                console.error("Не удалось зарегистрировать service worker:", error);
+            });
+        }
+    </script>
 
     <h2>Оформление заказа</h2>
 
-    <!-- action="" и method="get" можно не писать, форма все равно не перезагрузится -->
     <form id="orderForm">
-
         <label for="item">Позиция:</label><br>
         <select id="item" required>
-      <option value="item1">Карточка 1</option>
-      <option value="item2">Карточка 2</option>
-      <option value="item3">Карточка 3</option>
-    </select>
+            <option value="item1">Карточка 1</option>
+            <option value="item2">Карточка 2</option>
+            <option value="item3">Карточка 3</option>
+        </select>
         <br><br>
 
         <label for="quantity">Количество:</label><br>
-        <!-- Атрибуты min, step, required нужны для встроенной проверки браузера -->
         <input id="quantity" type="number" min="1" step="1" required>
         <br><br>
 
         <button type="submit">Рассчитать</button>
 
-        <!-- Сюда будет выводиться результат. Атрибуты нужны для доступности -->
         <p id="result" role="status" aria-live="polite" style="font-weight: bold; color: #0055cc;"></p>
-
     </form>
 
-    <!-- Подключаем скрипт с задержкой, чтобы HTML успел загрузиться -->
     <script src="form.js" defer></script>
 </body>
 

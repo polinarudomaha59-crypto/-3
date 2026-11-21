@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Экопункт · V25 — Главная</title>
+
+    <!-- Подключение PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#b85c24">
+
     <style>
         body {
             font-family: sans-serif;
@@ -95,9 +100,8 @@
     </header>
 
     <main>
-        <!-- Заголовок, который мы будем менять из JS (добавлен id) -->
-        <h1 id="main-title">Экопункт: дайте вещам вторую жизнь</h1>
-
+        <h1 id="main-title">Дайте вещам вторую жизнь</h1>
+        <p>Учебная версия 1</p>
         <p>Выберите материал для переработки</p>
         <p>Три предложения для выбора. Выберите материал для переработки.</p>
 
@@ -108,7 +112,7 @@
         <img src="images/item1.png" alt="Бумага, подготовленная к переработке">
 
         <p style="margin-top: 20px;">
-            <a class="btn" href="catalog.html">Открыть каталог 1</a>
+            <a class="btn" href="catalog.html">Открыть каталог</a>
             <a class="btn" href="form.html">Запланировать сдачу</a>
         </p>
     </main>
@@ -117,7 +121,6 @@
         <p>Учебный прототип · Вариант 25</p>
     </footer>
 
-    <!-- Подключение внешнего файла -->
     <script src="catalog.js"></script>
 </body>
 
