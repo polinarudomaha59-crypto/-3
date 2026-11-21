@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Экопункт · V25 — Главная</title>
 
-    <!-- Подключение PWA -->
-    <link rel="manifest" href="manifest.webmanifest">
+    <!-- Подключение PWA (обратите внимание на ./) -->
+    <link rel="manifest" href="./manifest.webmanifest">
     <meta name="theme-color" content="#b85c24">
 
     <style>
@@ -101,7 +101,10 @@
 
     <main>
         <h1 id="main-title">Дайте вещам вторую жизнь</h1>
+
+        <!-- Отметка версии для проверки кэша -->
         <p>Учебная версия 1</p>
+
         <p>Выберите материал для переработки</p>
         <p>Три предложения для выбора. Выберите материал для переработки.</p>
 
@@ -122,6 +125,15 @@
     </footer>
 
     <script src="catalog.js"></script>
+
+    <!-- Регистрация Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js").catch((error) => {
+                console.error("Не удалось зарегистрировать service worker:", error);
+            });
+        }
+    </script>
 </body>
 
 </html>

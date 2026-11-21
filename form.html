@@ -6,18 +6,11 @@
     <title>Заказ</title>
 
     <!-- Подключение PWA -->
-    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="manifest" href="./manifest.webmanifest">
     <meta name="theme-color" content="#b85c24">
 </head>
 
 <body>
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("./sw.js").catch((error) => {
-                console.error("Не удалось зарегистрировать service worker:", error);
-            });
-        }
-    </script>
 
     <h2>Оформление заказа</h2>
 
@@ -40,6 +33,15 @@
     </form>
 
     <script src="form.js" defer></script>
+
+    <!-- Регистрация Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js").catch((error) => {
+                console.error("Не удалось зарегистрировать service worker:", error);
+            });
+        }
+    </script>
 </body>
 
 </html>
