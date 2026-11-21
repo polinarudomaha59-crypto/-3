@@ -13,9 +13,7 @@ const FILES = [
     "./catalog-page.js",
     "./form.js",
     "./manifest.webmanifest",
-    "./images/item1.png",
-    "./images/icon-192.png",
-    "./images/icon-512.png"
+    "./images/item1.png"
 ];
 
 self.addEventListener("install", (event) => {
