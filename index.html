@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экопункт · V25 — Главная</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fdf6e3;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        header {
+            border-bottom: 2px solid #b85c24;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+            border: 1px solid #b85c24;
+            border-radius: 4px;
+        }
+        
+        nav a[aria-current="page"] {
+            background-color: #b85c24;
+            color: white;
+        }
+        
+        h1 {
+            border-left: 5px solid #b85c24;
+            padding-left: 10px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #b85c24;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        #status {
+            font-weight: bold;
+            color: green;
+            margin-bottom: 10px;
+        }
+        
+        #names {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <p class="app-name"><strong>Экопункт · V25</strong></p>
+        <nav>
+            <ul>
+                <li><a href="index.html" aria-current="page">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="form.html">План сдачи</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Заголовок, который мы будем менять из JS (добавлен id) -->
+        <h1 id="main-title">Дайте вещам вторую жизнь</h1>
+
+        <p>Выберите материал для переработки</p>
+        <p>Три предложения для выбора. Выберите материал для переработки.</p>
+
+        <p id="status" role="status"></p>
+        <button id="show-names" type="button">Показать названия</button>
+        <ul id="names"></ul>
+
+        <img src="images/item1.png" alt="Бумага, подготовленная к переработке">
+
+        <p style="margin-top: 20px;">
+            <a class="btn" href="catalog.html">Открыть каталог</a>
+            <a class="btn" href="form.html">Запланировать сдачу</a>
+        </p>
+    </main>
+
+    <footer>
+        <p>Учебный прототип · Вариант 25</p>
+    </footer>
+
+    <!-- Подключение внешнего файла -->
+    <script src="catalog.js"></script>
+</body>
+
+</html>
