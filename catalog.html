@@ -3,48 +3,97 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Каталог</title>
-
-    <!-- Подключение PWA -->
-    <link rel="manifest" href="./manifest.webmanifest">
-    <meta name="theme-color" content="#b85c24">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экопункт — каталог</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <a href="index.html">Главная</a> |
-            <a href="catalog.html">Каталог</a> |
-            <a href="form.html">Форма</a>
-        </nav>
+    <header class="header">
+        <div class="container">
+            <h1>Каталог отходов</h1>
+            <p>Учебная версия 1</p>
+
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог отходов</a>
+                <a href="form.html">Расчёт пользы</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <h1>Каталог товаров</h1>
+    <main class="container">
+        <section class="catalog-section">
+            <h2>Что можно сдать в экопункт?</h2>
 
-        <p>
-            <label for="search">Поиск по названию</label>
-            <input id="search" type="search" placeholder="Введите часть названия">
-        </p>
+            <input type="search" id="searchInput" placeholder="Поиск отходов...">
 
-        <div id="catalog-list" class="products"></div>
+            <p id="resultCount" class="result-count"></p>
 
-        <p id="status" role="status"></p>
+            <div id="wasteList" class="waste-list">
+                <article class="waste-card" data-name="пластик бутылки упаковка">
+                    <div class="waste-icon">🧴</div>
+                    <h3>Пластик</h3>
+                    <p>Пластиковые бутылки, канистры и упаковка.</p>
+                    <span class="tag">Контейнер: жёлтый</span>
+                </article>
+
+                <article class="waste-card" data-name="бумага картон газеты">
+                    <div class="waste-icon">📦</div>
+                    <h3>Бумага и картон</h3>
+                    <p>Газеты, журналы, коробки и чистый картон.</p>
+                    <span class="tag">Контейнер: синий</span>
+                </article>
+
+                <article class="waste-card" data-name="стекло бутылки банки">
+                    <div class="waste-icon">🍾</div>
+                    <h3>Стекло</h3>
+                    <p>Стеклянные бутылки и банки без остатков пищи.</p>
+                    <span class="tag">Контейнер: зелёный</span>
+                </article>
+
+                <article class="waste-card" data-name="металл алюминий железо банки">
+                    <div class="waste-icon">🥫</div>
+                    <h3>Металл</h3>
+                    <p>Алюминиевые банки, металлические крышки и детали.</p>
+                    <span class="tag">Контейнер: серый</span>
+                </article>
+
+                <article class="waste-card" data-name="батарейки аккумуляторы опасные отходы">
+                    <div class="waste-icon">🔋</div>
+                    <h3>Батарейки</h3>
+                    <p>Использованные батарейки и небольшие аккумуляторы.</p>
+                    <span class="tag">Специальный контейнер</span>
+                </article>
+
+                <article class="waste-card" data-name="одежда текстиль вещи">
+                    <div class="waste-icon">👕</div>
+                    <h3>Текстиль</h3>
+                    <p>Старая одежда, обувь и домашний текстиль.</p>
+                    <span class="tag">Контейнер для одежды</span>
+                </article>
+            </div>
+
+            <p id="emptyMessage" class="empty-message">
+                Ничего не найдено.
+            </p>
+        </section>
     </main>
 
-    <script src="catalog-page.js" defer></script>
+    <footer>
+        <p>© 2026 Экопункт</p>
+    </footer>
 
-    <!-- Регистрация Service Worker -->
+    <script src="app.js"></script>
     <script>
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("./sw.js").catch((error) => {
-                console.error("Не удалось зарегистрировать service worker:", error);
-            });
+            navigator.serviceWorker.register("./sw.js")
+                .then(() => console.log("Service Worker запущен"))
+                .catch((error) => console.error("Ошибка Service Worker:", error));
         }
     </script>
+
 </body>
 
 </html>

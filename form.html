@@ -3,45 +3,71 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Заказ</title>
-
-    <!-- Подключение PWA -->
-    <link rel="manifest" href="./manifest.webmanifest">
-    <meta name="theme-color" content="#b85c24">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экопункт — расчёт пользы</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h2>Оформление заказа</h2>
+    <header class="header">
+        <div class="container">
+            <h1>Расчёт пользы</h1>
+            <p>Учебная версия 1</p>
 
-    <form id="orderForm">
-        <label for="item">Позиция:</label><br>
-        <select id="item" required>
-            <option value="item1">Карточка 1</option>
-            <option value="item2">Карточка 2</option>
-            <option value="item3">Карточка 3</option>
-        </select>
-        <br><br>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог отходов</a>
+                <a href="form.html">Расчёт пользы</a>
+            </nav>
+        </div>
+    </header>
 
-        <label for="quantity">Количество:</label><br>
-        <input id="quantity" type="number" min="1" step="1" required>
-        <br><br>
+    <main class="container">
+        <section class="form-section">
+            <h2>Рассчитай свой вклад</h2>
+            <p>
+                Укажи вид отходов и количество сданных килограммов.
+            </p>
 
-        <button type="submit">Рассчитать</button>
+            <form id="ecoForm">
+                <label for="wasteType">Вид отходов</label>
 
-        <p id="result" role="status" aria-live="polite" style="font-weight: bold; color: #0055cc;"></p>
-    </form>
+                <select id="wasteType" required>
+        <option value="">Выберите вид отходов</option>
+        <option value="plastic">Пластик</option>
+        <option value="paper">Бумага и картон</option>
+        <option value="glass">Стекло</option>
+        <option value="metal">Металл</option>
+        <option value="textile">Текстиль</option>
+      </select>
 
-    <script src="form.js" defer></script>
+                <label for="weight">Количество, кг</label>
 
-    <!-- Регистрация Service Worker -->
+                <input type="number" id="weight" min="0.1" step="0.1" placeholder="Например, 5" required>
+
+                <button class="button" type="submit">
+        Рассчитать
+      </button>
+            </form>
+
+            <div id="calculationResult" class="calculation-result"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Экопункт</p>
+    </footer>
+
+    <script src="app.js"></script>
     <script>
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("./sw.js").catch((error) => {
-                console.error("Не удалось зарегистрировать service worker:", error);
-            });
+            navigator.serviceWorker.register("./sw.js")
+                .then(() => console.log("Service Worker запущен"))
+                .catch((error) => console.error("Ошибка Service Worker:", error));
         }
     </script>
+
 </body>
 
 </html>
